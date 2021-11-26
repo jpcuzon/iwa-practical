@@ -13,8 +13,23 @@ router.use(express.static(path.resolve(__dirname, 'views'))); //serving static c
 
 router.get('/', function(req, res){
 
-    
-        
+    res.writeHead(200, {'Content-Type' : 'text/html'});
+
+    let xml = fs.readFileSync('PaddysCafe.xml', 'utf8'),
+        xsl = fs.readFileSync('PaddysCafe.xsl', 'utf8');
+
+    console.log(xml);
+    console.log(xsl);
+
+    let doc = xmlParse(xml),
+        stylesheet = xmlParse(xsl);
+
+    let result = xsltProcess(doc, stylesheet);
+
+    console.log(result);
+
+    res.end(result.toString());
+
 })
 
 server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
