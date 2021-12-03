@@ -11,7 +11,7 @@ const   router = express(),
 
 router.use(express.static(path.resolve(__dirname, 'views'))); //serving static content from "views" folder
 
-router.get('/', function(req, res){
+router.get('/get/html', function(req, res){
 
     res.writeHead(200, {'Content-Type' : 'text/html'}); //Tell the user that the resource exists and which type that is
 
